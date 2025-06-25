@@ -42,8 +42,8 @@
 
             --dark-text: #ECF0F1;
             --light-text: #2C3E50;
-            --background-light: #2C3E50;
-            --background-medium: #34495E;
+            --background-light: #2C3E50; /* Fondo principal oscuro */
+            --background-medium: #34495E; /* Fondo para elementos intermedios */
             --border-color: #4A627A;
             --shadow-light: rgba(255, 255, 255, 0.08);
             --shadow-medium: rgba(255, 255, 255, 0.15);
@@ -100,7 +100,7 @@
             line-height: 1.7; /* Mayor interlineado para legibilidad */
             margin: 0;
             padding: 0;
-            background-color: var(--background-light);
+            background-color: var(--background-light); /* Usar variable para el fondo del body */
             color: var(--dark-text);
             scroll-behavior: smooth; /* Desplazamiento suave */
             transition: background-color 0.3s ease, color 0.3s ease; /* Transición para modo oscuro */
@@ -332,7 +332,7 @@
         section {
             padding: 30px; /* Más padding */
             margin-bottom: 30px; /* Más margen entre secciones */
-            background: #fff;
+            background: var(--background-light); /* Usar variable para el fondo de la sección */
             border-radius: 12px; /* Bordes más redondeados */
             box-shadow: 0 6px 25px var(--shadow-light); /* Sombra más suave y extendida */
             transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease; /* Transición al pasar el ratón y para modo oscuro */
@@ -499,7 +499,7 @@
         /* Estilos para la reflexión personal */
         #descripcion-puestos p {
             font-style: italic;
-            color: #666; /* Puedes ajustar este color si lo deseas */
+            color: var(--dark-text); /* Usar variable para el color de texto */
             margin-top: 20px;
             padding: 15px;
             background-color: var(--background-medium);
@@ -561,14 +561,14 @@
         }
 
         .solution-card {
-            background-color: var(--background-medium);
+            background-color: var(--background-medium); /* Usar variable para el fondo de la tarjeta */
             border-radius: 10px;
             padding: 25px;
             box-shadow: 0 4px 15px var(--shadow-light);
             flex: 1;
             min-width: 300px;
             max-width: 48%; /* Para dos columnas */
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -679,7 +679,7 @@
         }
 
         .kpi-card {
-            background-color: var(--background-medium);
+            background-color: var(--background-medium); /* Usar variable para el fondo de la tarjeta */
             border-radius: 10px;
             padding: 25px;
             box-shadow: 0 4px 15px var(--shadow-light);
@@ -688,7 +688,7 @@
             flex-direction: column;
             align-items: center;
             gap: 15px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
         }
 
         .kpi-card:hover {
@@ -771,13 +771,13 @@
         }
 
         .timeline-item-content {
-            background-color: var(--background-medium);
+            background-color: var(--background-medium); /* Usar variable para el fondo del contenido del timeline */
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 15px var(--shadow-light);
             width: calc(50% - 40px);
             position: relative;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
         }
 
         .timeline-item-content:hover {
