@@ -25,6 +25,52 @@
             --border-color: #DEE2E6; /* Gris para bordes, puedes ajustar si es necesario */
             --shadow-light: rgba(0, 0, 0, 0.08);
             --shadow-medium: rgba(0, 0, 0, 0.15);
+            --shadow-strong: rgba(0, 0, 0, 0.25);
+        }
+
+        /* Animaciones de entrada */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes zoomIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
 
         body {
@@ -52,9 +98,10 @@
             min-height: 100px;
             border-bottom: none; /* Eliminamos el borde inferior */
             text-align: center;
-            box-shadow: 0 4px 10px var(--shadow-medium); /* Sombra más pronunciada */
+            box-shadow: 0 4px 15px var(--shadow-strong); /* Sombra más pronunciada */
             position: relative;
             overflow: hidden; /* Para el efecto de fondo */
+            transform: translateZ(0); /* Para asegurar que el efecto de paralaje funcione */
         }
 
         header::before { /* Efecto de fondo abstracto */
@@ -79,6 +126,7 @@
             letter-spacing: 1.5px; /* Espaciado entre letras */
             position: relative;
             z-index: 1;
+            animation: fadeIn 1s ease-out forwards; /* Animación de entrada para el título */
         }
 
         header p {
@@ -86,6 +134,8 @@
             opacity: 0.9;
             position: relative;
             z-index: 1;
+            animation: fadeIn 1s ease-out forwards;
+            animation-delay: 0.3s; /* Retraso para que aparezca después del título */
         }
 
         /* Estilos para la nueva sección de portada */
@@ -99,9 +149,10 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3); /* Sombra más pronunciada */
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4); /* Sombra más pronunciada */
             position: relative;
             overflow: hidden;
+            transform: translateZ(0); /* Para asegurar que el efecto de paralaje funcione */
         }
 
         .cover-section::before { /* Efecto de fondo abstracto */
@@ -118,29 +169,34 @@
             z-index: 0;
         }
 
-        .cover-section h1, .cover-section h2, .cover-section p {
+        .cover-section h1, .cover-section h2, .cover-section p, .cover-section .details {
             margin: 10px 0;
             font-family: 'Montserrat', sans-serif;
             position: relative;
             z-index: 1;
+            opacity: 0; /* Ocultar inicialmente para animaciones */
+            animation: fadeIn 1s ease-out forwards;
         }
 
         .cover-section h1 {
             font-size: 3.5em;
             color: var(--accent-color-2); /* Color de acento para el título principal */
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
+            animation-delay: 0.2s;
         }
 
         .cover-section h2 {
             font-size: 2.2em;
             color: var(--light-text);
             margin-top: 30px;
+            animation-delay: 0.4s;
         }
 
         .cover-section p {
             font-size: 1.5em;
             color: var(--background-light);
             opacity: 0.9;
+            animation-delay: 0.6s;
         }
 
         .cover-section .details {
@@ -150,21 +206,29 @@
             background-color: rgba(0, 0, 0, 0.2);
             padding: 20px 30px;
             border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            animation-delay: 0.8s;
         }
 
+        /* Estilos para las secciones principales */
         section {
             padding: 30px; /* Más padding */
             margin-bottom: 30px; /* Más margen entre secciones */
             background: #fff;
             border-radius: 12px; /* Bordes más redondeados */
-            box-shadow: 0 6px 20px var(--shadow-light); /* Sombra más suave y extendida */
+            box-shadow: 0 6px 25px var(--shadow-light); /* Sombra más suave y extendida */
             transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transición al pasar el ratón */
+            opacity: 0; /* Ocultar inicialmente para la animación al scroll */
+            transform: translateY(30px); /* Desplazar ligeramente para la animación */
+        }
+
+        section.is-visible {
+            animation: fadeIn 0.8s ease-out forwards; /* Animación de entrada cuando es visible */
         }
 
         section:hover {
-            transform: translateY(-5px); /* Efecto de elevación al pasar el ratón */
-            box-shadow: 0 10px 30px var(--shadow-medium);
+            transform: translateY(-8px); /* Efecto de elevación al pasar el ratón */
+            box-shadow: 0 12px 35px var(--shadow-medium);
         }
 
         h2 {
@@ -206,7 +270,28 @@
             position: relative;
             padding-left: 25px; /* Espacio para el nuevo bullet */
             margin-bottom: 10px; /* Espacio entre ítems de lista */
+            opacity: 0; /* Ocultar inicialmente para animaciones */
+            transform: translateX(-20px); /* Desplazar para animación */
+            transition: opacity 0.5s ease, transform 0.5s ease;
         }
+
+        /* Animación para elementos de lista cuando la sección es visible */
+        section.is-visible ul li {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        /* Retraso secuencial para los ítems de lista */
+        section.is-visible ul li:nth-child(1) { transition-delay: 0.1s; }
+        section.is-visible ul li:nth-child(2) { transition-delay: 0.2s; }
+        section.is-visible ul li:nth-child(3) { transition-delay: 0.3s; }
+        section.is-visible ul li:nth-child(4) { transition-delay: 0.4s; }
+        section.is-visible ul li:nth-child(5) { transition-delay: 0.5s; }
+        section.is-visible ul li:nth-child(6) { transition-delay: 0.6s; }
+        section.is-visible ul li:nth-child(7) { transition-delay: 0.7s; }
+        section.is-visible ul li:nth-child(8) { transition-delay: 0.8s; }
+        section.is-visible ul li:nth-child(9) { transition-delay: 0.9s; }
+        section.is-visible ul li:nth-child(10) { transition-delay: 1.0s; }
+
 
         ul li::before { /* Nuevo bullet personalizado */
             content: '•'; /* O un icono unicode como '➤' o '✓' */
@@ -225,7 +310,15 @@
             margin-top: 25px;
             border-radius: 8px; /* Bordes redondeados para la tabla */
             overflow: hidden; /* Asegura que los bordes redondeados se apliquen */
-            box-shadow: 0 4px 15px var(--shadow-light);
+            box-shadow: 0 4px 20px var(--shadow-light);
+            opacity: 0; /* Ocultar inicialmente para animación */
+            transform: translateY(30px); /* Desplazar para animación */
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        table.is-visible { /* Clase activada por JS */
+            opacity: 1;
+            transform: translateY(0);
         }
 
         table, th, td {
@@ -266,6 +359,12 @@
             border-radius: 6px;
             font-weight: 600;
             display: inline-block; /* Para que el padding y border-radius funcionen bien */
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15); /* Sombra más pronunciada para el highlight */
+            transition: transform 0.2s ease;
+        }
+
+        .highlight:hover {
+            transform: scale(1.05); /* Pequeño zoom al pasar el ratón */
         }
 
         footer {
@@ -276,6 +375,7 @@
             margin-top: 40px;
             font-size: 0.9em;
             border-top: 5px solid var(--primary-color); /* Borde superior distintivo */
+            box-shadow: 0 -4px 15px var(--shadow-medium);
         }
 
         /* Estilos para la reflexión personal */
@@ -287,6 +387,16 @@
             background-color: var(--background-medium);
             border-left: 5px solid var(--secondary-color); /* Usando secondary-color */
             border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            opacity: 0; /* Ocultar inicialmente para animación */
+            transform: translateY(20px); /* Desplazar para animación */
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        #descripcion-puestos p.is-visible { /* Clase activada por JS */
+            opacity: 1;
+            transform: translateY(0);
+            transition-delay: 0.5s; /* Retraso para que aparezca después de la tabla */
         }
 
         /* Estilos para las cualidades de Hugo */
@@ -665,7 +775,6 @@
         <section id="resumen-conclusion">
             <h2>Resumen ejecutivo y conclusión</h2>
             <p>Bañadores y Más enfrenta retos significativos tras su adquisición, incluyendo bajas ventas, problemas de calidad y un ambiente laboral complejo. El análisis indica la necesidad de una acción rápida.</p>
-            <p>Las soluciones propuestas incluyen:</p>
             <ul>
                 <li>Reorganización estructural con nuevas gerencias.</li>
                 <li>Ajustes salariales y bonos por desempeño.</li>
@@ -684,7 +793,7 @@
                 <li>CESUMA, (s.f). “Características del proceso de toma de decisiones en una organización”. Recuperado de: <a href="https://www.cesuma.mx/blog/caracteristicas-del-proceso-de-toma-de-decisiones-en-una-organizacion.html" target="_blank">https://www.cesuma.mx/blog/caracteristicas-del-proceso-de-toma-de-decisiones-en-una-organizacion.html</a></li>
                 <li>De la Cruz Escobar, M. (2017). “Unidad 1. Las premisas de la dirección racional” Articulo PDF .Recuperado de: <a href="http://ual.dyndns.org/biblioteca/Analisis_Accion_Directa/Pdf/Unidad_01.pdf" target="_blank">http://ual.dyndns.org/biblioteca/Analisis_Accion_Directa/Pdf/Unidad_01.pdf</a></li>
                 <li>Enred,(s.f). “Aptitudes técnicas: qué son, importancia y desarrollo”. Recuperado de: <a href="https://blog.edenred.es/aptitudes-tecnicas-importancia-desarrollo/" target="_blank">https://blog.edenred.es/aptitudes-tecnicas-importancia-desarrollo/</a></li>
-                <li>ETD. (s.f). “El pensamiento útil” [imagen]. Recuperado de: <a href="https://escuelatranspersonal.com/el-pensamiento-util-escuela-espanola-de-desarrollo-transpersonal/" target="_blank">https://escuelatranspersonal.com/el-pensamiento-util-escuela-espanola-de-desarrollo-transpersonal/</a></li>
+                <li>ETD. (s.f). “El pensamiento útil” [imagen]. Recuperado de: <a href="https://escuelatranspersonal.com/el-pensamiento-util-escuela-espanola-de-desarrollo-transpersonal/" target="_blank">https://escuelatranspersonal.com/el-pensamiento-util-escuela-espanola-de-desarrollo-transpersonal/"</a></li>
                 <li>Farias, M. (2015). Modulo 2 toma de decisiones I. Recuperado de: <a href="https://es.slideshare.net/miguelfrias1/modulo-2-toma-de-decisiones-i" target="_blank">https://es.slideshare.net/miguelfrias1/modulo-2-toma-de-decisiones-i</a></li>
                 <li>Flores-Carretero, E. (s.f). “Todo sobre los patrones mentales y los 5 pasos para cambiarlos” [Imagen]. Recuperado de: <a href="https://www.ieie.eu/patrones-mentales-y-los-5-pasos-para-cambiarlos/" target="_blank">https://www.ieie.eu/patrones-mentales-y-los-5-pasos-para-cambiarlos/</a></li>
                 <li>García, J. (2013). Asertividad. Recuperado de: <a href="http://www.psicoterapeutas.com/pacientes/asertividad.htm" target="_blank">http://www.psicoterapeutas.com/pacientes/asertividad.htm</a></li>
@@ -693,7 +802,7 @@
                 <li>Grupoibhn. (2012), “Proceso de toma de decisiones” [Archivo de video], Recuperado de : <a href="https://www.youtube.com/watch?v=pZ9YdAVw5kQ" target="_blank">https://www.youtube.com/watch?v=pZ9YdAVw5kQ</a></li>
                 <li>Instituto Politécnico Nacional Centro de estudios Científicos y Tecnológicos #8 “NARCISO BASSOLS (2018), “Desarrollo De Habilidades Del Pensamiento, Antología”, Recuperado de: <a href="https://www.ipn.mx/assets/files/cecyt8/docs/Estudiantes/GuiasEstudio/AreaHumanistica/DHPAntologia20182019.pdf" target="_blank">https://www.ipn.mx/assets/files/cecyt8/docs/Estudiantes/GuiasEstudio/AreaHumanistica/DHPAntologia20182019.pdf</a></li>
                 <li>IPN (2018). Desarrollo de habilidades del pensamiento Antología. Recuoerado de: <a href="https://www.ipn.mx/assets/files/cecyt8/docs/Estudiantes/GuiasEstudio/AreaHumanistica/DHPAntologia20182019.pdf" target="_blank">https://www.ipn.mx/assets/files/cecyt8/docs/Estudiantes/GuiasEstudio/AreaHumanistica/DHPAntologia20182019.pdf</a></li>
-                <li>Info Capital Humano (2018).“12 habilidades técnicas que buscan los empleadores”. Recuperado de : <a href="https://www.infocapitalhumano.pe/recursos-humanos/noticias-y-movidas/12-habilidades-tecnicas-que-buscan-los-empleadores/" target="_blank">https://www.infocapitalhumano.pe/recursos-humanos/noticias-y-movidas/12-habilidades-tecnicas-que-buscan-los-empleadores/</a></li>
+                <li>Info Capital Humano (2018).“12 habilidades técnicas que buscan los empleadores”. Recuperado de : <a href="https://www.infocapitalhumano.pe/recursos-humanos/noticias-y-movidas/12-habilidades-tecnicas-que-buscan-los-empleadores/" target="_blank">https://www.infocapitalhumano.pe/recursos-humanos/noticias-y-movidas/12-habilidades-tecnicas-que-buscan-los-empleadores/"</a></li>
                 <li>Martin, M. (s.f). “Patrones Mentales, que son y como nos ayudan”. Recuperado de: <a href="https://thedamass.com/patrones-mentales-que-son-y-como-nos-ayudan/" target="_blank">https://thedamass.com/patrones-mentales-que-son-y-como-nos-ayudan/</a></li>
                 <li>Montoya, L. (2004). “Propuesta de un proceso educativo de habilidades del pensamiento como estrategias de aprendizaje en las organizaciones”. Recuperado de: <a href="https://1lib.mx/book/1402147/fde472" target="_blank">https://1lib.mx/book/1402147/fde472</a></li>
                 <li>Naoc, (s.f), “Identificar patrones para tener más opciones y mejorar los resultados”. Recuperado de: <a href="https://www.naoc.pro/identificar-patrones-para-tener-mas-opciones-y-mejorar-los-resultados/" target="_blank">https://www.naoc.pro/identificar-patrones-para-tener-mas-opciones-y-mejorar-los-resultados/</a></li>
@@ -711,7 +820,103 @@
     </div>
 
     <footer>
-        <p>&copy; 2023 Bañadores y Más. Todos los derechos reservados.</p>
+        <p>&copy; 2025 Bañadores y Más. Todos los derechos reservados.</p>
     </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('section');
+
+            const observerOptions = {
+                root: null, // viewport
+                rootMargin: '0px',
+                threshold: 0.1 // 10% de la sección visible para activar
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target); // Deja de observar una vez que la animación se ha disparado
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // Animación para la tabla en "Descripción de puestos"
+            const descriptionTable = document.querySelector('#descripcion-puestos table');
+            if (descriptionTable) {
+                const tableObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('is-visible');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, {
+                    root: null,
+                    rootMargin: '0px',
+                    threshold: 0.2 // Cuando el 20% de la tabla es visible
+                });
+                tableObserver.observe(descriptionTable);
+            }
+
+            // Animación para el párrafo de reflexión personal
+            const reflectionParagraph = document.querySelector('#descripcion-puestos p');
+            if (reflectionParagraph) {
+                const reflectionObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('is-visible');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, {
+                    root: null,
+                    rootMargin: '0px',
+                    threshold: 0.5 // Cuando el 50% del párrafo es visible
+                });
+                reflectionObserver.observe(reflectionParagraph);
+            }
+
+            // Animación para la tabla de "Estrategia para mejorar condiciones de planta e integrar áreas"
+            const estrategiaTable1 = document.querySelector('#estrategia-mejora table:nth-of-type(1)');
+            if (estrategiaTable1) {
+                const table1Observer = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('is-visible');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, {
+                    root: null,
+                    rootMargin: '0px',
+                    threshold: 0.2
+                });
+                table1Observer.observe(estrategiaTable1);
+            }
+
+            const estrategiaTable2 = document.querySelector('#estrategia-mejora table:nth-of-type(2)');
+            if (estrategiaTable2) {
+                const table2Observer = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('is-visible');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, {
+                    root: null,
+                    rootMargin: '0px',
+                    threshold: 0.2
+                });
+                table2Observer.observe(estrategiaTable2);
+            }
+        });
+    </script>
 </body>
 </html>
