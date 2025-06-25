@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bañadores y Más - Propuesta de Mejora</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Variables CSS para fácil modificación de colores */
+        :root {
+            --primary-color: #9F2241; /* Nuevo color principal: PANTONE 7420 C */
+            --secondary-color: #BC955C; /* Nuevo segundo color principal: PANTONE 465 C */
+            --tertiary-color: #235B4E; /* Nuevo tercer color principal: PANTONE 626 C */
+
+            /* Colores secundarios y de acento (manteniendo los anteriores o ajustando según necesidad) */
+            --accent-color-1: #009288; /* PANTONE 7473 C */
+            --accent-color-2: #DDC9A3; /* PANTONE 468 C */
+            --neutral-color: #98989A; /* PANTONE 7 C */
+            --dark-accent-color: #691C32; /* PANTONE 7421 C */
+
+            --dark-text: #2C3E50; /* Azul oscuro casi negro, puedes ajustar si es necesario */
+            --light-text: #ECF0F1; /* Gris claro, puedes ajustar si es necesario */
+            --background-light: #F8F9FA; /* Blanco muy suave, puedes ajustar si es necesario */
+            --background-medium: #E9ECEF; /* Gris claro, puedes ajustar si es necesario */
+            --border-color: #DEE2E6; /* Gris para bordes, puedes ajustar si es necesario */
+            --shadow-light: rgba(0, 0, 0, 0.08);
+            --shadow-medium: rgba(0, 0, 0, 0.15);
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif; /* Tipografía más moderna */
+            line-height: 1.7; /* Mayor interlineado para legibilidad */
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-light);
+            color: var(--dark-text);
+            scroll-behavior: smooth; /* Desplazamiento suave */
+        }
+
+        .container {
+            width: 90%; /* Un poco más ancho */
+            max-width: 1200px; /* Ancho máximo para pantallas grandes */
+            margin: auto;
+            overflow: hidden;
+            padding: 30px 0; /* Más padding vertical */
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); /* Degradado con los nuevos primary y secondary */
+            color: var(--light-text);
+            padding: 40px 0; /* Más padding */
+            min-height: 100px;
+            border-bottom: none; /* Eliminamos el borde inferior */
+            text-align: center;
+            box-shadow: 0 4px 10px var(--shadow-medium); /* Sombra más pronunciada */
+            position: relative;
+            overflow: hidden; /* Para el efecto de fondo */
+        }
+
+        header::before { /* Efecto de fondo abstracto */
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 0% 0%, rgba(255,255,255,0.1) 0%, transparent 70%),
+                        radial-gradient(circle at 100% 100%, rgba(255,255,255,0.1) 0%, transparent 70%);
+            transform: rotate(45deg);
+            opacity: 0.3;
+            z-index: 0;
+        }
+
+        header h1 {
+            margin: 0;
+            padding-bottom: 10px;
+            font-family: 'Montserrat', sans-serif; /* Fuente destacada para títulos */
+            font-size: 3.2em; /* Tamaño de fuente más grande */
+            letter-spacing: 1.5px; /* Espaciado entre letras */
+            position: relative;
+            z-index: 1;
+        }
+
+        header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Estilos para la nueva sección de portada */
+        .cover-section {
+            background: linear-gradient(135deg, var(--tertiary-color), var(--accent-color-1)); /* Degradado de colores */
+            color: var(--light-text);
+            text-align: center;
+            padding: 80px 20px; /* Más padding para centrar el contenido */
+            min-height: 100vh; /* Ocupa toda la altura de la ventana */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3); /* Sombra más pronunciada */
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cover-section::before { /* Efecto de fondo abstracto */
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 0% 0%, rgba(255,255,255,0.15) 0%, transparent 70%),
+                        radial-gradient(circle at 100% 100%, rgba(255,255,255,0.15) 0%, transparent 70%);
+            transform: rotate(45deg);
+            opacity: 0.4;
+            z-index: 0;
+        }
+
+        .cover-section h1, .cover-section h2, .cover-section p {
+            margin: 10px 0;
+            font-family: 'Montserrat', sans-serif;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cover-section h1 {
+            font-size: 3.5em;
+            color: var(--accent-color-2); /* Color de acento para el título principal */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .cover-section h2 {
+            font-size: 2.2em;
+            color: var(--light-text);
+            margin-top: 30px;
+        }
+
+        .cover-section p {
+            font-size: 1.5em;
+            color: var(--background-light);
+            opacity: 0.9;
+        }
+
+        .cover-section .details {
+            margin-top: 50px;
+            font-size: 1.3em;
+            line-height: 1.8;
+            background-color: rgba(0, 0, 0, 0.2);
+            padding: 20px 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        section {
+            padding: 30px; /* Más padding */
+            margin-bottom: 30px; /* Más margen entre secciones */
+            background: #fff;
+            border-radius: 12px; /* Bordes más redondeados */
+            box-shadow: 0 6px 20px var(--shadow-light); /* Sombra más suave y extendida */
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transición al pasar el ratón */
+        }
+
+        section:hover {
+            transform: translateY(-5px); /* Efecto de elevación al pasar el ratón */
+            box-shadow: 0 10px 30px var(--shadow-medium);
+        }
+
+        h2 {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--primary-color); /* Color principal para títulos de sección */
+            border-bottom: 3px solid var(--secondary-color); /* Borde inferior con el segundo color principal */
+            padding-bottom: 15px; /* Más padding */
+            margin-bottom: 25px; /* Más margen */
+            font-size: 2.2em;
+            position: relative;
+        }
+
+        h2::after { /* Pequeño detalle decorativo */
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+
+        h3 {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--dark-text);
+            margin-top: 30px; /* Más margen superior */
+            margin-bottom: 15px;
+            font-size: 1.6em;
+            border-left: 4px solid var(--primary-color); /* Borde izquierdo para destacar */
+            padding-left: 10px;
+        }
+
+        ul {
+            list-style: none; /* Quitamos los puntos por defecto */
+            padding-left: 0; /* Eliminamos el padding por defecto */
+        }
+
+        ul li {
+            position: relative;
+            padding-left: 25px; /* Espacio para el nuevo bullet */
+            margin-bottom: 10px; /* Espacio entre ítems de lista */
+        }
+
+        ul li::before { /* Nuevo bullet personalizado */
+            content: '•'; /* O un icono unicode como '➤' o '✓' */
+            color: var(--primary-color);
+            position: absolute;
+            left: 0;
+            font-size: 1.2em;
+            line-height: 1;
+            top: 2px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate; /* Para bordes redondeados en celdas */
+            border-spacing: 0; /* Eliminar espacio entre celdas */
+            margin-top: 25px;
+            border-radius: 8px; /* Bordes redondeados para la tabla */
+            overflow: hidden; /* Asegura que los bordes redondeados se apliquen */
+            box-shadow: 0 4px 15px var(--shadow-light);
+        }
+
+        table, th, td {
+            border: none; /* Eliminamos los bordes individuales */
+        }
+
+        th, td {
+            padding: 15px; /* Más padding en celdas */
+            text-align: left;
+            border-bottom: 1px solid var(--border-color); /* Solo borde inferior */
+        }
+
+        th {
+            background-color: var(--primary-color); /* Fondo de encabezado de tabla */
+            color: var(--light-text);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            text-transform: uppercase; /* Texto en mayúsculas */
+            font-size: 0.9em;
+        }
+
+        tr:nth-child(even) { /* Rayado de filas */
+            background-color: var(--background-medium);
+        }
+
+        tr:hover {
+            background-color: var(--background-light); /* Efecto al pasar el ratón por la fila */
+        }
+
+        td:first-child {
+            font-weight: 600; /* Destacar la primera columna */
+        }
+
+        .highlight {
+            background-color: var(--accent-color-2); /* Color de resaltado con un color secundario */
+            color: var(--dark-text);
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-weight: 600;
+            display: inline-block; /* Para que el padding y border-radius funcionen bien */
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: var(--dark-accent-color); /* Fondo oscuro para el footer con un color de acento */
+            color: var(--light-text);
+            margin-top: 40px;
+            font-size: 0.9em;
+            border-top: 5px solid var(--primary-color); /* Borde superior distintivo */
+        }
+
+        /* Estilos para la reflexión personal */
+        #descripcion-puestos p {
+            font-style: italic;
+            color: #666; /* Puedes ajustar este color si lo deseas */
+            margin-top: 20px;
+            padding: 15px;
+            background-color: var(--background-medium);
+            border-left: 5px solid var(--secondary-color); /* Usando secondary-color */
+            border-radius: 5px;
+        }
+
+        /* Estilos para las cualidades de Hugo */
+        #cualidades-hugo ul li::before {
+            content: '★'; /* Otro bullet para esta sección */
+            color: var(--tertiary-color); /* Usando tertiary-color */
+        }
+
+        /* Estilos para el resumen ejecutivo */
+        #resumen-conclusion ul li::before {
+            content: '✓'; /* Otro bullet para esta sección */
+            color: var(--primary-color); /* Usando primary-color */
+        }
+
+        /* Estilos para la sección de referencias */
+        #referencias ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        #referencias ul li {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        #referencias ul li::before {
+            content: '•'; /* O cualquier otro bullet que prefieras */
+            color: var(--primary-color);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+                padding: 20px 0;
+            }
+
+            header h1 {
+                font-size: 2.5em;
+            }
+
+            header p {
+                font-size: 1em;
+            }
+
+            .cover-section h1 {
+                font-size: 2.5em;
+            }
+
+            .cover-section h2 {
+                font-size: 1.8em;
+            }
+
+            .cover-section p {
+                font-size: 1.1em;
+            }
+
+            .cover-section .details {
+                font-size: 1em;
+                padding: 15px 20px;
+            }
+
+            h2 {
+                font-size: 1.8em;
+            }
+
+            h3 {
+                font-size: 1.4em;
+            }
+
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+
+            thead tr {
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            }
+
+            tr {
+                margin-bottom: 15px;
+                border: 1px solid var(--border-color);
+                border-radius: 8px;
+                overflow: hidden;
+            }
+
+            td {
+                border: none;
+                border-bottom: 1px solid var(--border-color);
+                position: relative;
+                padding-left: 50%;
+                text-align: right;
+            }
+
+            td:last-child {
+                border-bottom: none;
+            }
+
+            td::before {
+                content: attr(data-label);
+                position: absolute;
+                left: 0;
+                width: 45%;
+                padding-left: 10px;
+                font-weight: 600;
+                text-align: left;
+                color: var(--primary-color);
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="cover-section">
+        <h1>Universidad Rosario Castellanos</h1>
+        <h2>Licenciatura en Tecnologías de la Información y la Comunicación</h2>
+        <div class="details">
+            <p><strong>Asignatura:</strong> Habilidades Gerenciales</p>
+            <p><strong>Profesor:</strong> Roberto Ibarra Ferreira</p>
+            <p><strong>Alumno:</strong> Juan Guillermo Martínez Flores</p>
+        </div>
+    </section>
+
+    <header>
+        <h1>Bañadores y Más</h1>
+        <p>Propuesta de Mejora Organizacional</p>
+    </header>
+
+    <div class="container">
+        <section id="percepcion-problema">
+            <h2>Percepción del problema</h2>
+            <ul>
+                <li>Caída en ventas y constantes rechazos de pedidos debido a fallas de calidad.</li>
+                <li>Alta rotación en producción, almacenes y distribución, resultando en pérdida de materiales.</li>
+                <li>Personal operativo sobrecargado con horas extra y sin aumentos salariales desde hace tres años.</li>
+                <li>Administrativos trabajando tres horas adicionales diarias sin compensación.</li>
+                <li>Fuerte centralización en la toma de decisiones (Licenciado Félix o Contador Husein), lo que retrasa operaciones.</li>
+                <li>Áreas críticas (contabilidad y recursos humanos) con personal insuficiente, provocando errores y reprocesos.</li>
+                <li>Ambiente laboral deteriorado con incertidumbre, desmotivación y falta de trabajo en equipo.</li>
+            </ul>
+        </section>
+
+        <section id="analisis-situacion">
+            <h2>Análisis de la situación</h2>
+            <ul>
+                <li>Estructura organizacional rígida con demasiadas personas reportando a los mismos gerentes, saturándolos.</li>
+                <li>Mandos medios sin autonomía, impidiendo decisiones rápidas.</li>
+                <li>Políticas salariales y de clima laboral desactualizadas.</li>
+                <li>Procesos operativos y contables poco eficientes.</li>
+                <li><span class="highlight">Oportunidades concretas:</span>
+                    <ul>
+                        <li>Inversión autorizada de \$1,000,000 para reestructuración.</li>
+                        <li>Inversión autorizada de \$350,000 para mejorar el clima organizacional.</li>
+                        <li>Luz verde para contratar dos nuevos gerentes.</li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+
+        <section id="definicion-objetivos">
+            <h2>Definición de objetivos</h2>
+            <ul>
+                <li>Reorganizar la jerarquía para reducir los tramos de control y aliviar la carga gerencial.</li>
+                <li>Empoderar a líderes de área y personal para la toma de decisiones.</li>
+                <li>Reducir los rechazos de producto en un 30% en seis meses.</li>
+                <li>Estabilizar al personal operativo, bajando la rotación en un 40%.</li>
+                <li>Reducir la pérdida de materiales a la mitad.</li>
+                <li>Eliminar los reprocesos contables en tres meses.</li>
+                <li>Fortalecer el clima organizacional, integrando áreas y reduciendo la incertidumbre interna.</li>
+            </ul>
+        </section>
+
+        <section id="propuesta-solucion">
+            <h2>Propuesta de solución</h2>
+            <h3>Organigrama Actual:</h3>
+            <ul>
+                <li><strong>Administrador General:</strong> Hugo (Cima)</li>
+                <li><strong>Gerente Administrativo:</strong> Roberto
+                    <ul>
+                        <li>Facturación (8 personas)</li>
+                        <li>Ingresos (4 personas)</li>
+                    </ul>
+                </li>
+                <li><strong>Gerente de Operaciones:</strong> Laura
+                    <ul>
+                        <li>Producción (80 personas)</li>
+                        <li>Diseño (4 personas)</li>
+                        <li>Sistemas (8 personas)</li>
+                        <li>Choferes (2 personas)</li>
+                    </ul>
+                </li>
+                <li><strong>Talento Humano:</strong> Rosita (2 personas)</li>
+                <li><strong>Contabilidad:</strong> Tercerizada (2 externos)</li>
+            </ul>
+            <p>Esto muestra una centralización excesiva y sobrecarga en mandos clave, además de una contabilidad desconectada.</p>
+
+            <h3>Cambios Clave Propuestos:</h3>
+            <ul>
+                <li>Se agregan tres nuevos puestos de liderazgo:
+                    <ul>
+                        <li>Gerente de Ventas</li>
+                        <li>Subgerente de Producción</li>
+                        <li>Gerente de Calidad y Procesos</li>
+                    </ul>
+                </li>
+                <li>Reasignación de tres personas del equipo administrativo a contabilidad interna para des-tercerizar la función.</li>
+                <li>El área de Recursos Humanos sube a nivel gerencial bajo el liderazgo de Rosita para priorizar el clima organizacional.</li>
+            </ul>
+
+            <h3>Justificación de la nueva gerencia de Calidad y Procesos:</h3>
+            <ul>
+                <li>Fundamental para supervisión especializada en calidad, especialmente tras los rechazos.</li>
+                <li>Clave para estandarizar procesos operativos ineficientes.</li>
+                <li>Reportará directamente a Hugo para asegurar la implementación continua de mejoras.</li>
+            </ul>
+        </section>
+
+        <section id="descripcion-puestos">
+            <h2>Descripción de puestos para nuevos gerentes</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Puesto</th>
+                        <th>Habilidades Técnicas</th>
+                        <th>Habilidades Conceptuales</th>
+                        <th>Perfil de Líder</th>
+                        <th>Experiencia Profesional</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td data-label="Puesto"><strong>Gerente de Ventas</strong></td>
+                        <td data-label="Habilidades Técnicas">Análisis de mercado, CRM y forecasting, Gestión de equipos comerciales.</td>
+                        <td data-label="Habilidades Conceptuales">Visión estratégica de expansión, Adaptabilidad a cambios.</td>
+                        <td data-label="Perfil de Líder">Asertivo y motivador, capacidad para comunicar metas claras y empoderar equipos, Resiliente.</td>
+                        <td data-label="Experiencia Profesional">5 años o más en retail o moda con logros en crecimiento de ventas (especialmente B2B).</td>
+                    </tr>
+                    <tr>
+                        <td data-label="Puesto"><strong>Subgerente de Producción</strong></td>
+                        <td data-label="Habilidades Técnicas">Control de inventarios, Lean manufacturing, Normas de calidad textil, Optimización de recursos.</td>
+                        <td data-label="Habilidades Conceptuales">Solución de problemas operativos.</td>
+                        <label data-label="Perfil de Líder">Colaborativo (fomenta trabajo en equipo), Decisivo y ágil en resolución de incidencias en planta.</label>
+                        <td data-label="Experiencia Profesional">3 años o más en producción textil con experiencia en reducción de mermas.</td>
+                    </tr>
+                    <tr>
+                        <td data-label="Puesto"><strong>Gerente de Calidad y Procesos</strong></td>
+                        <td data-label="Habilidades Técnicas">ISO 9001, Auditorías internas, Análisis de datos con enfoque en KPI.</td>
+                        <td data-label="Habilidades Conceptuales">Pensamiento sistémico, Innovación en mejora continua.</td>
+                        <td data-label="Perfil de Líder">Analítico y proactivo (anticipa riesgos y propone soluciones), Influenciador de cultura de calidad.</td>
+                        <td data-label="Experiencia Profesional">4 años o más en gestión de calidad en manufactura (preferentemente textil).</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p><strong>Reflexión personal:</strong> Estoy preparado para adaptarme a estos perfiles. Un líder moderno debe equilibrar habilidades técnicas (ejecución) y conceptuales (visión), tal como exigen los roles descritos.</p>
+        </section>
+
+        <section id="estrategia-mejora">
+            <h2>Estrategia para mejorar condiciones de planta e integrar áreas</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Acción Clave</th>
+                        <th>Detalle</th>
+                        <th>Cantidad/Frecuencia</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td data-label="Acción Clave"><strong>Revisión Salarial Inmediata</strong></td>
+                        <td data-label="Detalle">Usar el fondo para ajustes equitativos en planta, priorizando antigüedad y desempeño.</td>
+                        <td data-label="Cantidad/Frecuencia">\$200,000 del fondo</td>
+                    </tr>
+                    <tr>
+                        <td data-label="Acción Clave"><strong>Programa "Calidad +"</strong></td>
+                        <td data-label="Detalle">Bonos por reducción de errores y metas de producción.</td>
+                        <td data-label="Cantidad/Frecuencia">\$150,000 restantes</td>
+                    </tr>
+                    <tr>
+                        <td data-label="Acción Clave"><strong>Círculos de Calidad</strong></td>
+                        <td data-label="Detalle">Equipos mixtos (operativos + diseño + sistemas) para resolver problemas juntos.</td>
+                        <td data-label="Cantidad/Frecuencia">Semanalmente</td>
+                    </tr>
+                    <tr>
+                        <td data-label="Acción Clave"><strong>Capacitación Cruzada</strong></td>
+                        <td data-label="Detalle">Rotaciones controladas entre áreas para entender cómo se conectan. Administrativos en planta.</td>
+                        <td data-label="Cantidad/Frecuencia">1 día/mes</td>
+                    </tr>
+                    <tr>
+                        <td data-label="Acción Clave"><strong>Comunicación Transparente</strong></td>
+                        <td data-label="Detalle">Reuniones con Hugo para compartir avances y desafíos.</td>
+                        <td data-label="Cantidad/Frecuencia">Bimensuales</td>
+                    </tr>
+                    <tr>
+                        <td data-label="Acción Clave"><strong>Eventos de Integración</strong></td>
+                        <td data-label="Detalle">Jornadas de team building (ej. talleres de innovación).</td>
+                        <td data-label="Cantidad/Frecuencia">Trimestrales</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Plan de Implementación (3 - 6 meses)</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Mes</th>
+                        <th>Acciones</th>
+                        <th>Responsable</th>
+                        <th>Indicadores</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td data-label="Mes"><strong>1</strong></td>
+                        <td data-label="Acciones">Contratar gerentes. Reasignar administrativa a contabilidad. Diagnóstico de procesos operativos.</td>
+                        <td data-label="Responsable">Hugo + Rosita</td>
+                        <td data-label="Indicadores">Tiempo de cubrir vacantes. % errores contables.</td>
+                    </tr>
+                    <tr>
+                        <td data-label="Mes"><strong>2</strong></td>
+                        <td data-label="Acciones">Lanzamiento programa "Calidad+". Primeros círculos de calidad. Ajustes salariales.</td>
+                        <td data-label="Responsable">Gerente de Calidad + RR.HH.</td>
+                        <td data-label="Indicadores">Rotación en planta. Nivel de satisfacción (encuesta).</td>
+                    </tr>
+                    <tr>
+                        <td data-label="Mes"><strong>3</strong></td>
+                        <td data-label="Acciones">Capacitación cruzada. Auditoría de calidad inicial. Integración de sistemas (ERP).</td>
+                        <td data-label="Responsable">Subgerente de Producción + Sistemas</td>
+                        <td data-label="Indicadores">Pedidos rechazados. Tiempo de reproceso.</td>
+                    </tr>
+                    <tr>
+                        <td data-label="Mes"><strong>4 - 6</strong></td>
+                        <td data-label="Acciones">Evaluación de bonos. Evento de integración. Revisión KPI generales.</td>
+                        <td data-label="Responsable">Dirección General + Gerentes</td>
+                        <td data-label="Indicadores">Rentabilidad. Cumplimiento de metas. Clima laboral.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="herramientas-seguimiento">
+            <h2>Herramientas de Seguimiento y Evaluación</h2>
+            <ul>
+                <li><strong>Sistema ERP:</strong> Para ver en tiempo real producción, inventarios y ventas, detectando problemas tempranamente.</li>
+                <li><strong>Dashboard de KPIs:</strong> Panel con indicadores clave como tasa de errores, rotación de personal y satisfacción de empleados para monitorear mejoras.</li>
+                <li><strong>Encuestas de Clima Laboral:</strong> Cada dos meses para conocer el sentir del personal y realizar ajustes.</li>
+                <li><strong>Auditorías Externas:</strong> Cada tres meses para asegurar el cumplimiento de estándares de calidad y obtener una opinión externa.</li>
+                <li><strong>Reuniones Semanales con Gerentes:</strong> Utilizando el método PDCA (Planificar, Hacer, Verificar, Actuar) para revisar avances y tomar decisiones.</li>
+            </ul>
+        </section>
+
+        <section id="cualidades-hugo">
+            <h2>Cualidades de Hugo como el nuevo líder del equipo de Bañadores y Más</h2>
+            <ul>
+                <li><strong>Energía Positiva:</strong> Ayuda a reducir la incertidumbre del equipo ante los cambios.</li>
+                <li><strong>Comunicación Clara:</strong> Explica las cosas de manera que todos se sienten parte del proceso.</li>
+                <li><strong>Análisis Rápido:</strong> Identifica rápidamente los problemas y las soluciones.</li>
+                <li><strong>Apertura a Escuchar:</strong> No se encierra en su oficina, generando confianza en el equipo.</li>
+            </ul>
+
+            <h3>¿Son estas las características que definen las habilidades gerenciales de un líder de nuestros tiempos? ¿Por qué?</h3>
+            <p>Sí, totalmente. En el entorno empresarial actual, que cambia rápidamente, un líder necesita estas cualidades:</p>
+            <ul>
+                <li><strong>Motivación y Buena Vibra:</strong> Clave para equipos bajo presión.</li>
+                <li><strong>Comunicación Efectiva:</strong> Evita malentendidos y mantiene a todos alineados, especialmente durante grandes cambios.</li>
+                <li><strong>Capacidad Analítica y Rapidez:</strong> Permite tomar decisiones eficientes sin perder tiempo.</li>
+                <li><strong>Disposición a Escuchar:</strong> Hace que los empleados se sientan valorados y parte de las soluciones, lo cual es crucial hoy en día.</li>
+            </ul>
+            <p>Por estas razones, Hugo encaja perfectamente con lo que se necesita de un líder moderno.</p>
+        </section>
+
+        <section id="resumen-conclusion">
+            <h2>Resumen ejecutivo y conclusión</h2>
+            <p>Bañadores y Más enfrenta retos significativos tras su adquisición, incluyendo bajas ventas, problemas de calidad y un ambiente laboral complejo. El análisis indica la necesidad de una acción rápida.</p>
+            <p>Las soluciones propuestas incluyen:</p>
+            <ul>
+                <li>Reorganización estructural con nuevas gerencias.</li>
+                <li>Ajustes salariales y bonos por desempeño.</li>
+                <li>Formación de equipos para resolución de problemas.</li>
+                <li>Encuestas regulares de clima laboral.</li>
+                <li>Actividades de integración.</li>
+            </ul>
+            <p>El plan de trabajo abarca seis meses, comenzando con la contratación de nuevos gerentes y capacitación. Para el seguimiento y evaluación, se utilizarán un sistema ERP, dashboards de KPIs, encuestas bimestrales y reuniones semanales con los responsables.</p>
+        </section>
+
+        <section id="referencias">
+            <h2>Referencias</h2>
+            <ul>
+                <li>Bustillos, M. (2020). Toma de decisiones, definición, tipos de decisión, proceso y ejemplos. Recuperado de <a href="https://www.gestiopolis.com/toma-de-decisiones-definicion-tipos-proceso-ejemplos/" target="_blank">https://www.gestiopolis.com/toma-de-decisiones-definicion-tipos-proceso-ejemplos/</a></li>
+                <li>Candela, M. (2019). “Demostrar habilidades técnicas para programar calculadoras deportivas” [Imagen]. Recuperado de: <a href="https://8acandeladisenopai.blogspot.com/2019/05/emana-01-sintesis-demostrar-habilidades.html" target="_blank">https://8acandeladisenopai.blogspot.com/2019/05/emana-01-sintesis-demostrar-habilidades.html</a></li>
+                <li>CESUMA, (s.f). “Características del proceso de toma de decisiones en una organización”. Recuperado de: <a href="https://www.cesuma.mx/blog/caracteristicas-del-proceso-de-toma-de-decisiones-en-una-organizacion.html" target="_blank">https://www.cesuma.mx/blog/caracteristicas-del-proceso-de-toma-de-decisiones-en-una-organizacion.html</a></li>
+                <li>De la Cruz Escobar, M. (2017). “Unidad 1. Las premisas de la dirección racional” Articulo PDF .Recuperado de: <a href="http://ual.dyndns.org/biblioteca/Analisis_Accion_Directa/Pdf/Unidad_01.pdf" target="_blank">http://ual.dyndns.org/biblioteca/Analisis_Accion_Directa/Pdf/Unidad_01.pdf</a></li>
+                <li>Enred,(s.f). “Aptitudes técnicas: qué son, importancia y desarrollo”. Recuperado de: <a href="https://blog.edenred.es/aptitudes-tecnicas-importancia-desarrollo/" target="_blank">https://blog.edenred.es/aptitudes-tecnicas-importancia-desarrollo/</a></li>
+                <li>ETD. (s.f). “El pensamiento útil” [imagen]. Recuperado de: <a href="https://escuelatranspersonal.com/el-pensamiento-util-escuela-espanola-de-desarrollo-transpersonal/" target="_blank">https://escuelatranspersonal.com/el-pensamiento-util-escuela-espanola-de-desarrollo-transpersonal/</a></li>
+                <li>Farias, M. (2015). Modulo 2 toma de decisiones I. Recuperado de: <a href="https://es.slideshare.net/miguelfrias1/modulo-2-toma-de-decisiones-i" target="_blank">https://es.slideshare.net/miguelfrias1/modulo-2-toma-de-decisiones-i</a></li>
+                <li>Flores-Carretero, E. (s.f). “Todo sobre los patrones mentales y los 5 pasos para cambiarlos” [Imagen]. Recuperado de: <a href="https://www.ieie.eu/patrones-mentales-y-los-5-pasos-para-cambiarlos/" target="_blank">https://www.ieie.eu/patrones-mentales-y-los-5-pasos-para-cambiarlos/</a></li>
+                <li>García, J. (2013). Asertividad. Recuperado de: <a href="http://www.psicoterapeutas.com/pacientes/asertividad.htm" target="_blank">http://www.psicoterapeutas.com/pacientes/asertividad.htm</a></li>
+                <li>García, R.; Castillo, M.; Narcia, C.; Brindis, E. y Hernández, F. (2005) “Desarrollo de habilidades Gerenciales”. Recuperado de: <a href="http://fcasua.contad.unam.mx/apuntes/interiores/docs/2005/administracion/optativas/0097.pdf" target="_blank">http://fcasua.contad.unam.mx/apuntes/interiores/docs/2005/administracion/optativas/0097.pdf</a></li>
+                <li>Gutiérrez, L. (2019). “El desarrollo tecnológico, el avance que nos afecta” [Imagen]. Recuperado de: <a href="https://medium.com/@3220181067/el-desarrollo-tecnol%C3%B3gico-el-avance-que-nos-afecta-652a2eca180" target="_blank">https://medium.com/@3220181067/el-desarrollo-tecnol%C3%B3gico-el-avance-que-nos-afecta-652a2eca180</a></li>
+                <li>Grupoibhn. (2012), “Proceso de toma de decisiones” [Archivo de video], Recuperado de : <a href="https://www.youtube.com/watch?v=pZ9YdAVw5kQ" target="_blank">https://www.youtube.com/watch?v=pZ9YdAVw5kQ</a></li>
+                <li>Instituto Politécnico Nacional Centro de estudios Científicos y Tecnológicos #8 “NARCISO BASSOLS (2018), “Desarrollo De Habilidades Del Pensamiento, Antología”, Recuperado de: <a href="https://www.ipn.mx/assets/files/cecyt8/docs/Estudiantes/GuiasEstudio/AreaHumanistica/DHPAntologia20182019.pdf" target="_blank">https://www.ipn.mx/assets/files/cecyt8/docs/Estudiantes/GuiasEstudio/AreaHumanistica/DHPAntologia20182019.pdf</a></li>
+                <li>IPN (2018). Desarrollo de habilidades del pensamiento Antología. Recuoerado de: <a href="https://www.ipn.mx/assets/files/cecyt8/docs/Estudiantes/GuiasEstudio/AreaHumanistica/DHPAntologia20182019.pdf" target="_blank">https://www.ipn.mx/assets/files/cecyt8/docs/Estudiantes/GuiasEstudio/AreaHumanistica/DHPAntologia20182019.pdf</a></li>
+                <li>Info Capital Humano (2018).“12 habilidades técnicas que buscan los empleadores”. Recuperado de : <a href="https://www.infocapitalhumano.pe/recursos-humanos/noticias-y-movidas/12-habilidades-tecnicas-que-buscan-los-empleadores/" target="_blank">https://www.infocapitalhumano.pe/recursos-humanos/noticias-y-movidas/12-habilidades-tecnicas-que-buscan-los-empleadores/</a></li>
+                <li>Martin, M. (s.f). “Patrones Mentales, que son y como nos ayudan”. Recuperado de: <a href="https://thedamass.com/patrones-mentales-que-son-y-como-nos-ayudan/" target="_blank">https://thedamass.com/patrones-mentales-que-son-y-como-nos-ayudan/</a></li>
+                <li>Montoya, L. (2004). “Propuesta de un proceso educativo de habilidades del pensamiento como estrategias de aprendizaje en las organizaciones”. Recuperado de: <a href="https://1lib.mx/book/1402147/fde472" target="_blank">https://1lib.mx/book/1402147/fde472</a></li>
+                <li>Naoc, (s.f), “Identificar patrones para tener más opciones y mejorar los resultados”. Recuperado de: <a href="https://www.naoc.pro/identificar-patrones-para-tener-mas-opciones-y-mejorar-los-resultados/" target="_blank">https://www.naoc.pro/identificar-patrones-para-tener-mas-opciones-y-mejorar-los-resultados/</a></li>
+                <li>Negociosyempresa, (2020), “Toma de decisiones en una empresa | Guía definitiva para que sea efectiva” [imagen]. Recuperado de: <a href="https://negociosyempresa.com/toma-de-decisiones-en-una-empresa/" target="_blank">https://negociosyempresa.com/toma-de-decisiones-en-una-empresa/</a></li>
+                <li>Netinbag (s.f). “¿Qué son los patrones de pensamiento?”. Recuperado de: <a href="https://www.netinbag.com/es/health/what-are-thought-patterns.html" target="_blank">https://www.netinbag.com/es/health/what-are-thought-patterns.html</a></li>
+                <li>Ni más ni menos, (2017), “3 habilidades obligatorias para todo gerente” [Archivo de video]. Recuperado de: <a href="https://www.youtube.com/watch?v=ojG5ETDl9_g" target="_blank">https://www.youtube.com/watch?v=ojG5ETDl9_g</a></li>
+                <li>Peiró, R. (2020). “Proceso de toma de decisiones”. Recuperado de: <a href="https://economipedia.com/definiciones/proceso-de-toma-de-decisiones.html#referencia" target="_blank">https://economipedia.com/definiciones/proceso-de-toma-de-decisiones.html#referencia</a></li>
+                <li>Ramírez, H. (2020), “El proceso de toma de decisiones en una empresa”[imagen], Recuperado de : <a href="https://protecciondatos-lopd.com/empresas/proceso-toma-de-decisiones-en-una-empresa/" target="_blank">https://protecciondatos-lopd.com/empresas/proceso-toma-de-decisiones-en-una-empresa/</a></li>
+                <li>Redacción, Negociosyempresa, (2020), “Toma de decisiones en una empresa | Guía definitiva para que sea efectiva” [Imagen]. Recuperado de : <a href="https://negociosyempresa.com/toma-de-decisiones-en-una-empresa/" target="_blank">https://negociosyempresa.com/toma-de-decisiones-en-una-empresa/</a></li>
+                <li>Torres, J. (s.f), “Ética empresarial”. Recuperado de: <a href="https://www2.deloitte.com/mx/es/pages/risk/articles/etica-empresarial.html" target="_blank">https://www2.deloitte.com/mx/es/pages/risk/articles/etica-empresarial.html</a></li>
+                <li>Unileon, (2013). “Toma de decisiones y solución de problemas”. Recuperado de: <a href="https://servicios.unileon.es/formacion-pdi/files/2013/03/TOMA-DE-DECISIONES-2014.pdf" target="_blank">https://servicios.unileon.es/formacion-pdi/files/2013/03/TOMA-DE-DECISIONES-2014.pdf</a></li>
+                <li>WOBI, (2017), “¿Por qué aprender a tomar decisiones? | Ernesto Weissmann | WOBI” [Archivo de video], Recuperado de: <a href="https://www.youtube.com/watch?v=GHctejUx1XY&t=2s" target="_blank">https://www.youtube.com/watch?v=GHctejUx1XY&t=2s</a></li>
+            </ul>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2023 Bañadores y Más. Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>
